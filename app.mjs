@@ -2,6 +2,7 @@ import express, { json, urlencoded } from 'express';
 import routes from './routes/userroutes.mjs';
 import protectedRoute from './routes/protectedRoutes.mjs';
 import mongoose from 'mongoose';
+import authenticateToken from './middleware/authmiddleware.mjs';
 
 
 const app = express();
@@ -11,9 +12,12 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 app.use('/api', routes);
-app.use('/api', protectedRoute);
+app.use('/api/protected', authenticateToken ,protectedRoute);
 
-const mongoURI = 'mongodb://localhost:27017/news-app';
+const dbURI = 'mongodb://localhost:27017/news-app';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((error) => console.error('Connection error', error));
 
 
 

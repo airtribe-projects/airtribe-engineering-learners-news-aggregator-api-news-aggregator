@@ -24,10 +24,6 @@ const userSchema = new Schema({
       enum: ['us', 'uk', 'in', 'au'],
       default: 'us',
     },
-    sources: {
-      type: [String],
-      default: [],
-    },
   },
 }, { timestamps: true });
 

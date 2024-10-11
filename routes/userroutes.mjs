@@ -1,7 +1,9 @@
 import express, { json } from 'express';
 import User from './../models/userSchema.mjs';  // Import the User model
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 const { sign} = jwt;
 const route = express.Router();
@@ -34,7 +36,7 @@ route.post('/login', async (req, res) => {
 
   try {
     // Find user by email
-    const user = await findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
@@ -53,7 +55,8 @@ route.post('/login', async (req, res) => {
       token,  // Send the token to the user
     });
   } catch (error) {
-    res.status(500).json({ error: 'Server error' });
+    console.log(error)
+    res.status(500).json({ error: `server error ${error}` });
   }
 });
 
