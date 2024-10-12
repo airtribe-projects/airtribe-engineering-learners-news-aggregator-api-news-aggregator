@@ -10,7 +10,7 @@ const route = express.Router();
 // const app = express();
 // app.use(json());
 
-route.post('/register', async (req, res) => {
+route.post('/users/signup', async (req, res) => {
   const { email, password, preferences } = req.body;
 
   try {
@@ -31,7 +31,7 @@ route.post('/register', async (req, res) => {
 });
 
 
-route.post('/login', async (req, res) => {
+route.post('/users/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {

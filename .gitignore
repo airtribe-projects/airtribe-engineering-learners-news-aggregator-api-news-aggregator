@@ -1,2 +1,5 @@
 node_modules
 .tap
+.env
+package.json
+package-lock.json

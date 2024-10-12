@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const protectedRoute = express.Router();
 
-protectedRoute.get('/preferences', async (req, res) => {
+protectedRoute.get('/users/preferences', async (req, res) => {
   try {
     // Access user from the request after JWT authentication
     const user = req.user;
@@ -21,7 +21,7 @@ protectedRoute.get('/preferences', async (req, res) => {
 });
 
 
-protectedRoute.put('/preferences', async (req, res) => {
+protectedRoute.put('/users/preferences', async (req, res) => {
   const { category, region } = req.body.preferences;
 
   try {
