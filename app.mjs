@@ -3,10 +3,12 @@ import routes from './routes/userroutes.mjs';
 import protectedRoute from './routes/protectedRoutes.mjs';
 import mongoose from 'mongoose';
 import authenticateToken from './middleware/authmiddleware.mjs';
+import cookieParser from 'cookie-parser';
 
 
 const app = express();
 const port = 3000;
+app.use(cookieParser())
 
 app.use(json());
 app.use(urlencoded({ extended: true }));

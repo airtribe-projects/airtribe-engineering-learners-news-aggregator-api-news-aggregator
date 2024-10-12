@@ -25,6 +25,8 @@ const userSchema = new Schema({
       default: 'us',
     },
   },
+  readArticles: [{ type: String }],       // Store article IDs
+  favoriteArticles: [{ type: String }],   // Store article IDs
 }, { timestamps: true });
 
 // Pre-save hook to hash the password before saving the user

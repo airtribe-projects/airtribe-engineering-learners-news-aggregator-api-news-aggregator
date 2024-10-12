@@ -49,6 +49,8 @@ route.post('/login', async (req, res) => {
 
     // Generate JWT token
     const token = sign({ id: user._id },process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // 1 hour expiry
+
 
     res.json({
       message: 'Login successful',
