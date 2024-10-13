@@ -1,17 +1,21 @@
 const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const authRoutes = require('./Routes/authRoutes');
+const newsRoutes = require('./Routes/newsRoutes');
+
+// Load environment variables
+dotenv.config();
+
+// Connect to the database
+connectDB();
+
 const app = express();
-const port = 3000;
+app.use(express.json());  // For parsing JSON data
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Routes
+app.use('/auth', authRoutes);
+app.use('/', newsRoutes);
 
-app.listen(port, (err) => {
-    if (err) {
-        return console.log('Something bad happened', err);
-    }
-    console.log(`Server is listening on ${port}`);
-});
-
-
-
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
